@@ -13,7 +13,12 @@ export class LayoutComponent implements OnInit {
   constructor(private alertify: AlertifyService) { }
 
   ngOnInit(): void {
-   this.alertify.message("merhaba",{})
-  }
+  //  this.alertify.message("sdsd",
+  //  {
+  //   messageType:MessageType.Warning,
+  //   delay:2,
+  //   position:Position.TopCenter
+  //  });
+}
 
 }

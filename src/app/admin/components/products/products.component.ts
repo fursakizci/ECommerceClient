@@ -18,14 +18,14 @@ export class ProductsComponent extends BaseComponent implements OnInit {
     this.showSpinner(SpinnerType.Pacman);
     
     this.httpClientService.get({
-      controller:"products"
+      controller:"product"
     }).subscribe(data => console.log(data));
-
+   
     // this.httpClientService.post({
     //   controller:"products"},
     //   {
     //     name:"deneme111",
-    //     stock: 11,
+    //     stock: 11, 
     //     price: 5
     //   }).subscribe();
 
