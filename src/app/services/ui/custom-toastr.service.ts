@@ -7,8 +7,13 @@ export class CustomToastrService {
 
   constructor(private toastr: ToastrService) { }
 
-  message(message:string, title:string, messageType : ToastrMessageType, toastrPosition:Partial<ToastrOptions>){
-    this.toastr[messageType](message,title,{
+  message(
+    message:string, 
+    title:string, 
+    toastrPosition:Partial<ToastrOptions>)
+    {
+    this.toastr[toastrPosition.messageType](message,title,
+      {
       positionClass:toastrPosition.position
     })
   }
