@@ -57,11 +57,12 @@ export class HttpClientService {
 
   delete<T>(requestParameter: Partial<RequestParameters>, id: string):Observable<T> {
     let url: string = "";
+    debugger;
     if (requestParameter.fullEndPoint)
     url = requestParameter.fullEndPoint
     else
     url = `${this.url(requestParameter)}/${id}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
-
+    console.log("url",url)
     return this.httpClient.delete<T>(url, { headers: requestParameter.headers });
   }
 

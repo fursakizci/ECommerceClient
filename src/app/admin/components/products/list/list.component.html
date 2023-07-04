@@ -25,11 +25,18 @@
         <td mat-cell *matCellDef="let element"> {{element.createDate}} </td>
       </ng-container>
 
+      <!-- Picture Column -->
+      <ng-container matColumnDef="pictures">
+        <th mat-header-cell *matHeaderCellDef width="30" ></th>
+        <td mat-cell *matCellDef="let element"> <img style="cursor:pointer;" (click)="addProductImages(element.id)"
+          src="../../../../../assets/picture-icon.png" width="25", height="25"/> </td>
+      </ng-container>
+
       <!-- UpdatedDate Column -->
-      <ng-container matColumnDef="updateDate">
+      <!-- <ng-container matColumnDef="updateDate">
         <th mat-header-cell *matHeaderCellDef> Updated Date </th>
         <td mat-cell *matCellDef="let element"> {{element.updateDate </td>
-      </ng-container>
+      </ng-container> -->
 
       <!-- Delete Column -->
       <ng-container matColumnDef="delete">
@@ -37,7 +44,7 @@
         <td [id]="element.id" mat-cell *matCellDef="let element" 
         appDelete 
         (callback)="getProducts()"
-        controller = "products"></td>
+        controller = "product"></td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

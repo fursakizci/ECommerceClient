@@ -8,6 +8,8 @@ import { AlertifyService, MessageType, Position } from 'src/app/services/admin/a
 import { ProductService } from 'src/app/services/common/models/product.service';
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { DialogService } from 'src/app/services/common/dialog.service';
+import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 
 @Component({
   selector: 'app-list',
@@ -17,18 +19,21 @@ import { MatPaginator } from '@angular/material/paginator';
 
 export class ListComponent extends BaseComponent implements OnInit {
 
-  constructor(spinner:NgxSpinnerService, private productService: ProductService
-    ,private alertifyService:AlertifyService) {
+  constructor(spinner:NgxSpinnerService, 
+    private productService: ProductService,
+    private alertifyService:AlertifyService,
+    private dialogService:DialogService) {
     super(spinner)
    }
    
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createDate','updateDate'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createDate','delete'];
   dataSource:MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   async getProducts(){
     this.showSpinner(SpinnerType.BallSpin);
-    const allProducts : {totalCount : number,products:List_Product[]} = await this.productService.read(
+    const allProducts : {totalCount : number,products:List_Product[]} = 
+    await this.productService.read(
       this.paginator ? this.paginator.pageIndex : 0,
       this.paginator ? this.paginator.pageSize : 5,
       () => this.hideSpinner(SpinnerType.BallSpin),
@@ -41,6 +46,16 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
     this.paginator.length = allProducts.totalCount;
     this.dataSource.paginator = this.paginator;
+  }
+
+  addProductImages(id:string){
+    this.dialogService.openDialog({
+      componentType:SelectProductImageDialogComponent,
+      data:id,
+      options:{
+        width:"1400px"
+      }
+    })
   }
 
   async pageChanged(){
